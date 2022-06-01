@@ -1,25 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import ErrorBoundary from "./components/ErrorBoundary";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+// layouts
+
+import Admin from "./layouts/Admin";
+import Auth from "./layouts/Auth";
+
+// views without layouts
+
+import Landing from "./views/Landing";
+import Profile from "./views/Profile";
+import Index from "./views/Index";
+import Login from "./views/auth/Login";
+import Register from "./views/auth/Register";
+import Dashboard from "./views/admin/Dashboard";
+import Maps from "./views/admin/Maps";
+import Settings from "./views/admin/Settings";
+import Tables from "./views/admin/Tables";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <Routes>
+          {/* add routes with layouts */}
+          <Route path="admin" element={<Admin />}>
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="maps" element={<Maps />} />
+            <Route path="settings" element={<Settings />} />
+            <Route path="tables" element={<Tables />} />
+          </Route>
+          <Route path="auth" element={<Auth />}>
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+          </Route>
+          {/* add routes without layouts */}
+          <Route path="landing" element={<Landing />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="/" element={<Index />} />
+        </Routes>
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 }
 

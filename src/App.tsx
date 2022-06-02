@@ -18,28 +18,13 @@ import Dashboard from "./views/admin/Dashboard";
 import Maps from "./views/admin/Maps";
 import Settings from "./views/admin/Settings";
 import Tables from "./views/admin/Tables";
+import Router from "./routes/Router";
 
 function App() {
   return (
     <ErrorBoundary>
       <BrowserRouter>
-        <Routes>
-          {/* add routes with layouts */}
-          <Route path="admin" element={<Admin />}>
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="maps" element={<Maps />} />
-            <Route path="settings" element={<Settings />} />
-            <Route path="tables" element={<Tables />} />
-          </Route>
-          <Route path="auth" element={<Auth />}>
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-          </Route>
-          {/* add routes without layouts */}
-          <Route path="landing" element={<Landing />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="/" element={<Index />} />
-        </Routes>
+        <Router />
       </BrowserRouter>
     </ErrorBoundary>
   );
